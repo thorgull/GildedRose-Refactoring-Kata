@@ -155,7 +155,6 @@ class GildedRoseTest {
         }
     }
 
-    @Disabled
     @Test
     void testConjured() {
         for (int d = -10; d <= 0; d++) {

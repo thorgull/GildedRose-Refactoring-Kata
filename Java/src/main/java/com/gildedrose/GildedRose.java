@@ -9,6 +9,15 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
+            if (item.name.equals("Conjured Mana Cake")) {
+                if (item.sellIn <= 0) {
+                    item.quality = Math.max(0, item.quality - 4);
+                } else {
+                    item.quality = Math.max(0, item.quality - 2);
+                }
+                item.sellIn -= 1;
+                continue;
+            }
             if (!item.name.equals("Aged Brie")
                     && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (item.quality > 0) {
