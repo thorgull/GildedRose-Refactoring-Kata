@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -149,6 +150,32 @@ class GildedRoseTest {
                 new TestCase("Aged Brie", d, 48, d-1, 49),
                 new TestCase("Aged Brie", d, 49, d-1, 50),
                 new TestCase("Aged Brie", d, 50, d-1, 50)
+            );
+        }
+    }
+
+    @Test
+    void testConjured() {
+        for (int d = -10; d <= 0; d++) {
+            genericTest(
+                new TestCase("Conjured Mana Cake", d, 0, d-1, 0),
+                new TestCase("Conjured Mana Cake", d, 1, d-1, 0),
+                new TestCase("Conjured Mana Cake", d, 2, d-1, 0),
+                new TestCase("Conjured Mana Cake", d, 3, d-1, 0),
+                new TestCase("Conjured Mana Cake", d, 4, d-1, 0),
+                new TestCase("Conjured Mana Cake", d, 5, d-1, 1),
+                new TestCase("Conjured Mana Cake", d, 6, d-1, 2),
+                new TestCase("Conjured Mana Cake", d, 7, d-1, 3)
+            );
+        }
+        for (int d = 1; d < 10; d++) {
+            genericTest(
+                new TestCase("Conjured Mana Cake", d, 0, d-1, 0),
+                new TestCase("Conjured Mana Cake", d, 1, d-1, 0),
+                new TestCase("Conjured Mana Cake", d, 2, d-1, 0),
+                new TestCase("Conjured Mana Cake", d, 3, d-1, 1),
+                new TestCase("Conjured Mana Cake", d, 4, d-1, 2),
+                new TestCase("Conjured Mana Cake", d, 5, d-1, 3)
             );
         }
     }
