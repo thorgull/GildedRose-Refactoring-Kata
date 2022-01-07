@@ -2,6 +2,7 @@ package com.gildedrose;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -154,6 +155,7 @@ class GildedRoseTest {
         }
     }
 
+    @Disabled
     @Test
     void testConjured() {
         for (int d = -10; d <= 0; d++) {
