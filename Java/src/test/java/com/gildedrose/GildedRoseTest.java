@@ -7,8 +7,7 @@ import org.junit.jupiter.api.function.Executable;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GildedRoseTest {
 
