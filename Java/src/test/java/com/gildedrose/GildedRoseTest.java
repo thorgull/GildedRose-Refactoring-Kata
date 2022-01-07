@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -68,15 +67,22 @@ class GildedRoseTest {
     }
 
     @Test
-    void foo() {
-        genericTest(
-            new TestCase("foo", 0, 0, -1, 0),
-            new TestCase("foo", 1, 1, 0, 0),
-            new TestCase("foo", 10, 20, 9, 19),
-            new TestCase("foo", -1, 0, -2, 0),
-            new TestCase("foo", -1, 1, -2, 0),
-            new TestCase("foo", -1, 5, -2, 3)
-        );
+    void testDefaults() {
+        for (int d = -10; d <= 0; d++) {
+            genericTest(
+                new TestCase("foo", d, 0, d-1, 0),
+                new TestCase("foo", d, 1, d-1, 0),
+                new TestCase("foo", d, 2, d-1, 0),
+                new TestCase("foo", d, 3, d-1, 1)
+            );
+        }
+        for (int d = 1; d < 10; d++) {
+            genericTest(
+                new TestCase("foo", d, 0, d-1, 0),
+                new TestCase("foo", d, 1, d-1, 0),
+                new TestCase("foo", d, 2, d-1, 1)
+            );
+        }
     }
 
     @Test
@@ -89,6 +95,63 @@ class GildedRoseTest {
         }
     }
 
+    @Test
+    void testBackstagePasses() {
+        for (int d = 20; d > 10; d--) {
+            genericTest(
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 0, d-1, 1),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 48, d-1, 49),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 49, d-1, 50),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 50, d-1, 50)
+            );
+        }
+        for (int d = 10; d > 5; d--) {
+            genericTest(
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 0, d-1, 2),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 47, d-1, 49),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 48, d-1, 50),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 49, d-1, 50),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 50, d-1, 50)
+            );
+        }
+        for (int d = 5; d > 0; d--) {
+            genericTest(
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 0, d-1, 3),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 46, d-1, 49),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 47, d-1, 50),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 48, d-1, 50),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 49, d-1, 50),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 50, d-1, 50)
+            );
+        }
+        genericTest(
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", 0, 0, -1, 0)
+        );
+    }
+
+    @Test
+    void testAgedBrie() {
+        for (int d = -10; d <= 0; d++) {
+            genericTest(
+                new TestCase("Aged Brie", d, 0, d-1, 2),
+                new TestCase("Aged Brie", d, 1, d-1, 3),
+                new TestCase("Aged Brie", d, 47, d-1, 49),
+                new TestCase("Aged Brie", d, 48, d-1, 50),
+                new TestCase("Aged Brie", d, 49, d-1, 50),
+                new TestCase("Aged Brie", d, 50, d-1, 50)
+            );
+        }
+        for (int d = 1; d <= 20; d++) {
+            genericTest(
+                new TestCase("Aged Brie", d, 0, d-1, 1),
+                new TestCase("Aged Brie", d, 1, d-1, 2),
+                new TestCase("Aged Brie", d, 47, d-1, 48),
+                new TestCase("Aged Brie", d, 48, d-1, 49),
+                new TestCase("Aged Brie", d, 49, d-1, 50),
+                new TestCase("Aged Brie", d, 50, d-1, 50)
+            );
+        }
+    }
 
     static String toString(Item item) {
         return "Item { name: " + item.name + ", sellIn: " + item.sellIn + ", quality: "+ item.quality + "}";
