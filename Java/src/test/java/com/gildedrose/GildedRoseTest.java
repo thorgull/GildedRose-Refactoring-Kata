@@ -52,10 +52,10 @@ class GildedRoseTest {
         }
     }
 
-    void genericTest(TestCase... testCases) {
+    void genericTest(int times, TestCase... testCases) {
         Item[] items = Arrays.stream(testCases).map(TestCase::createItem).toArray(Item[]::new);
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        IntStream.range(0, times).forEach(i -> app.updateQuality());
         assertEquals(testCases.length, app.items.length);
 
         Assertions.assertAll(
@@ -71,7 +71,7 @@ class GildedRoseTest {
         String name = "foo";
         for (int d = -10; d <= 0; d++) {
             genericTest(
-                new TestCase(name, d, 0, d-1, 0),
+                1, new TestCase(name, d, 0, d-1, 0),
                 new TestCase(name, d, 1, d-1, 0),
                 new TestCase(name, d, 2, d-1, 0),
                 new TestCase(name, d, 3, d-1, 1)
@@ -79,7 +79,7 @@ class GildedRoseTest {
         }
         for (int d = 1; d < 10; d++) {
             genericTest(
-                new TestCase(name, d, 0, d-1, 0),
+                1, new TestCase(name, d, 0, d-1, 0),
                 new TestCase(name, d, 1, d-1, 0),
                 new TestCase(name, d, 2, d-1, 1)
             );
@@ -87,11 +87,26 @@ class GildedRoseTest {
     }
 
     @Test
+    void testThirtyDays() {
+        genericTest(30,
+            new TestCase("+5 Dexterity Vest", 10, 20, -20, 0),
+            new TestCase("Aged Brie", 2, 0, -28, 50),
+            new TestCase("Elixir of the Mongoose", 5, 7, -25, 0),
+            new TestCase("Sulfuras, Hand of Ragnaros", 0, 80, 0, 80),
+            new TestCase("Sulfuras, Hand of Ragnaros", -1, 80, -1, 80),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", 15, 20, -15, 0),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", 10, 49, -20, 0),
+            new TestCase("Backstage passes to a TAFKAL80ETC concert", 5, 49, -25, 0),
+            new TestCase("Conjured Mana Cake", 3, 6, -27, 0)
+        );
+    }
+
+    @Test
     void testSulfuras() {
         String name = "Sulfuras, Hand of Ragnaros";
         for (int q = 0; q < 80; q++) {
             for (int d = -10; d <= 10; d++) {
-                genericTest(
+                genericTest(1,
                     new TestCase(name, d, q, d, q)
                 );
             }
@@ -102,42 +117,44 @@ class GildedRoseTest {
     void testBackstagePasses() {
         String name = "Backstage passes to a TAFKAL80ETC concert";
         for (int d = 20; d > 10; d--) {
-            genericTest(
-            new TestCase(name, d, 0, d-1, 1),
-            new TestCase(name, d, 48, d-1, 49),
-            new TestCase(name, d, 49, d-1, 50),
-            new TestCase(name, d, 50, d-1, 50)
+            genericTest(1,
+                new TestCase(name, d, 0, d-1, 1),
+                new TestCase(name, d, 48, d-1, 49),
+                new TestCase(name, d, 49, d-1, 50),
+                new TestCase(name, d, 50, d-1, 50)
             );
         }
         for (int d = 10; d > 5; d--) {
-            genericTest(
-            new TestCase(name, d, 0, d-1, 2),
-            new TestCase(name, d, 47, d-1, 49),
-            new TestCase(name, d, 48, d-1, 50),
-            new TestCase(name, d, 49, d-1, 50),
-            new TestCase(name, d, 50, d-1, 50)
+            genericTest(1,
+                new TestCase(name, d, 0, d-1, 2),
+                new TestCase(name, d, 47, d-1, 49),
+                new TestCase(name, d, 48, d-1, 50),
+                new TestCase(name, d, 49, d-1, 50),
+                new TestCase(name, d, 50, d-1, 50)
             );
         }
         for (int d = 5; d > 0; d--) {
-            genericTest(
-            new TestCase(name, d, 0, d-1, 3),
-            new TestCase(name, d, 46, d-1, 49),
-            new TestCase(name, d, 47, d-1, 50),
-            new TestCase(name, d, 48, d-1, 50),
-            new TestCase(name, d, 49, d-1, 50),
-            new TestCase(name, d, 50, d-1, 50)
+            genericTest(1,
+                new TestCase(name, d, 0, d-1, 3),
+                new TestCase(name, d, 46, d-1, 49),
+                new TestCase(name, d, 47, d-1, 50),
+                new TestCase(name, d, 48, d-1, 50),
+                new TestCase(name, d, 49, d-1, 50),
+                new TestCase(name, d, 50, d-1, 50)
             );
         }
-        genericTest(
-            new TestCase(name, 0, 0, -1, 0)
-        );
+        for (int d = 0; d > -10; d--) {
+            genericTest(1,
+                new TestCase(name, d, 0, d-1, 0)
+            );
+        }
     }
 
     @Test
     void testAgedBrie() {
         String name = "Aged Brie";
         for (int d = -10; d <= 0; d++) {
-            genericTest(
+            genericTest(1,
                 new TestCase(name, d, 0, d-1, 2),
                 new TestCase(name, d, 1, d-1, 3),
                 new TestCase(name, d, 47, d-1, 49),
@@ -147,7 +164,7 @@ class GildedRoseTest {
             );
         }
         for (int d = 1; d <= 20; d++) {
-            genericTest(
+            genericTest(1,
                 new TestCase(name, d, 0, d-1, 1),
                 new TestCase(name, d, 1, d-1, 2),
                 new TestCase(name, d, 47, d-1, 48),
@@ -162,7 +179,7 @@ class GildedRoseTest {
     void testConjured() {
         String name = "Conjured Mana Cake";
         for (int d = -10; d <= 0; d++) {
-            genericTest(
+            genericTest(1,
                 new TestCase(name, d, 0, d-1, 0),
                 new TestCase(name, d, 1, d-1, 0),
                 new TestCase(name, d, 2, d-1, 0),
@@ -174,7 +191,7 @@ class GildedRoseTest {
             );
         }
         for (int d = 1; d < 10; d++) {
-            genericTest(
+            genericTest(1,
                 new TestCase(name, d, 0, d-1, 0),
                 new TestCase(name, d, 1, d-1, 0),
                 new TestCase(name, d, 2, d-1, 0),
