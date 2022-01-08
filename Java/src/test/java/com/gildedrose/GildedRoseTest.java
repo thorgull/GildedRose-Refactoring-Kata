@@ -1,8 +1,6 @@
 package com.gildedrose;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -70,113 +68,119 @@ class GildedRoseTest {
 
     @Test
     void testDefaults() {
+        String name = "foo";
         for (int d = -10; d <= 0; d++) {
             genericTest(
-                new TestCase("foo", d, 0, d-1, 0),
-                new TestCase("foo", d, 1, d-1, 0),
-                new TestCase("foo", d, 2, d-1, 0),
-                new TestCase("foo", d, 3, d-1, 1)
+                new TestCase(name, d, 0, d-1, 0),
+                new TestCase(name, d, 1, d-1, 0),
+                new TestCase(name, d, 2, d-1, 0),
+                new TestCase(name, d, 3, d-1, 1)
             );
         }
         for (int d = 1; d < 10; d++) {
             genericTest(
-                new TestCase("foo", d, 0, d-1, 0),
-                new TestCase("foo", d, 1, d-1, 0),
-                new TestCase("foo", d, 2, d-1, 1)
+                new TestCase(name, d, 0, d-1, 0),
+                new TestCase(name, d, 1, d-1, 0),
+                new TestCase(name, d, 2, d-1, 1)
             );
         }
     }
 
     @Test
     void testSulfuras() {
+        String name = "Sulfuras, Hand of Ragnaros";
         for (int q = 0; q < 80; q++) {
-            for (int d = -10; d <= 10; d++)
-            genericTest(
-                new TestCase("Sulfuras, Hand of Ragnaros", d, q, d, q)
-            );
+            for (int d = -10; d <= 10; d++) {
+                genericTest(
+                    new TestCase(name, d, q, d, q)
+                );
+            }
         }
     }
 
     @Test
     void testBackstagePasses() {
+        String name = "Backstage passes to a TAFKAL80ETC concert";
         for (int d = 20; d > 10; d--) {
             genericTest(
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 0, d-1, 1),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 48, d-1, 49),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 49, d-1, 50),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 50, d-1, 50)
+            new TestCase(name, d, 0, d-1, 1),
+            new TestCase(name, d, 48, d-1, 49),
+            new TestCase(name, d, 49, d-1, 50),
+            new TestCase(name, d, 50, d-1, 50)
             );
         }
         for (int d = 10; d > 5; d--) {
             genericTest(
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 0, d-1, 2),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 47, d-1, 49),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 48, d-1, 50),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 49, d-1, 50),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 50, d-1, 50)
+            new TestCase(name, d, 0, d-1, 2),
+            new TestCase(name, d, 47, d-1, 49),
+            new TestCase(name, d, 48, d-1, 50),
+            new TestCase(name, d, 49, d-1, 50),
+            new TestCase(name, d, 50, d-1, 50)
             );
         }
         for (int d = 5; d > 0; d--) {
             genericTest(
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 0, d-1, 3),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 46, d-1, 49),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 47, d-1, 50),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 48, d-1, 50),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 49, d-1, 50),
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", d, 50, d-1, 50)
+            new TestCase(name, d, 0, d-1, 3),
+            new TestCase(name, d, 46, d-1, 49),
+            new TestCase(name, d, 47, d-1, 50),
+            new TestCase(name, d, 48, d-1, 50),
+            new TestCase(name, d, 49, d-1, 50),
+            new TestCase(name, d, 50, d-1, 50)
             );
         }
         genericTest(
-            new TestCase("Backstage passes to a TAFKAL80ETC concert", 0, 0, -1, 0)
+            new TestCase(name, 0, 0, -1, 0)
         );
     }
 
     @Test
     void testAgedBrie() {
+        String name = "Aged Brie";
         for (int d = -10; d <= 0; d++) {
             genericTest(
-                new TestCase("Aged Brie", d, 0, d-1, 2),
-                new TestCase("Aged Brie", d, 1, d-1, 3),
-                new TestCase("Aged Brie", d, 47, d-1, 49),
-                new TestCase("Aged Brie", d, 48, d-1, 50),
-                new TestCase("Aged Brie", d, 49, d-1, 50),
-                new TestCase("Aged Brie", d, 50, d-1, 50)
+                new TestCase(name, d, 0, d-1, 2),
+                new TestCase(name, d, 1, d-1, 3),
+                new TestCase(name, d, 47, d-1, 49),
+                new TestCase(name, d, 48, d-1, 50),
+                new TestCase(name, d, 49, d-1, 50),
+                new TestCase(name, d, 50, d-1, 50)
             );
         }
         for (int d = 1; d <= 20; d++) {
             genericTest(
-                new TestCase("Aged Brie", d, 0, d-1, 1),
-                new TestCase("Aged Brie", d, 1, d-1, 2),
-                new TestCase("Aged Brie", d, 47, d-1, 48),
-                new TestCase("Aged Brie", d, 48, d-1, 49),
-                new TestCase("Aged Brie", d, 49, d-1, 50),
-                new TestCase("Aged Brie", d, 50, d-1, 50)
+                new TestCase(name, d, 0, d-1, 1),
+                new TestCase(name, d, 1, d-1, 2),
+                new TestCase(name, d, 47, d-1, 48),
+                new TestCase(name, d, 48, d-1, 49),
+                new TestCase(name, d, 49, d-1, 50),
+                new TestCase(name, d, 50, d-1, 50)
             );
         }
     }
 
     @Test
     void testConjured() {
+        String name = "Conjured Mana Cake";
         for (int d = -10; d <= 0; d++) {
             genericTest(
-                new TestCase("Conjured Mana Cake", d, 0, d-1, 0),
-                new TestCase("Conjured Mana Cake", d, 1, d-1, 0),
-                new TestCase("Conjured Mana Cake", d, 2, d-1, 0),
-                new TestCase("Conjured Mana Cake", d, 3, d-1, 0),
-                new TestCase("Conjured Mana Cake", d, 4, d-1, 0),
-                new TestCase("Conjured Mana Cake", d, 5, d-1, 1),
-                new TestCase("Conjured Mana Cake", d, 6, d-1, 2),
-                new TestCase("Conjured Mana Cake", d, 7, d-1, 3)
+                new TestCase(name, d, 0, d-1, 0),
+                new TestCase(name, d, 1, d-1, 0),
+                new TestCase(name, d, 2, d-1, 0),
+                new TestCase(name, d, 3, d-1, 0),
+                new TestCase(name, d, 4, d-1, 0),
+                new TestCase(name, d, 5, d-1, 1),
+                new TestCase(name, d, 6, d-1, 2),
+                new TestCase(name, d, 7, d-1, 3)
             );
         }
         for (int d = 1; d < 10; d++) {
             genericTest(
-                new TestCase("Conjured Mana Cake", d, 0, d-1, 0),
-                new TestCase("Conjured Mana Cake", d, 1, d-1, 0),
-                new TestCase("Conjured Mana Cake", d, 2, d-1, 0),
-                new TestCase("Conjured Mana Cake", d, 3, d-1, 1),
-                new TestCase("Conjured Mana Cake", d, 4, d-1, 2),
-                new TestCase("Conjured Mana Cake", d, 5, d-1, 3)
+                new TestCase(name, d, 0, d-1, 0),
+                new TestCase(name, d, 1, d-1, 0),
+                new TestCase(name, d, 2, d-1, 0),
+                new TestCase(name, d, 3, d-1, 1),
+                new TestCase(name, d, 4, d-1, 2),
+                new TestCase(name, d, 5, d-1, 3)
             );
         }
     }
