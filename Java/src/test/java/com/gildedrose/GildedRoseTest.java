@@ -181,7 +181,4 @@ class GildedRoseTest {
         }
     }
 
-    static String toString(Item item) {
-        return "Item { name: " + item.name + ", sellIn: " + item.sellIn + ", quality: "+ item.quality + "}";
-    }
 }
